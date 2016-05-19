@@ -19,4 +19,5 @@ script: 'echo "foobar"'
 
 after_success: |
   cd "$TRAVIS_BUILD_DIR"
+  git log --oneline --graph --decorate
   git status

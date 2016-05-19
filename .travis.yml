@@ -1,0 +1,22 @@
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+sudo: false
+
+os:
+  - linux
+
+git:
+  depth: 10
+
+branches:
+  only:
+    - master
+
+script: 'echo "foobar"'
+
+after_success: |
+  cd "$TRAVIS_BUILD_DIR"
+  git status

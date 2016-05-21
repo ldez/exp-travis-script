@@ -52,27 +52,26 @@ ssh-add ~/.ssh/${SSH_KEY_NAME}
 echo "First step achieved"
 
 ## Experimental
-git remote -v
-git status -sb
-git log --oneline --graph --decorate
+# git remote -v
+# git status -sb
+# git log --oneline --graph --decorate
 
 ## Change origin url to use SSH
 git remote set-url origin ${GIT_REPOSITORY}
-git remote -v
+# git remote -v
 
 ## Force checkout master branch
-git fetch
 git checkout master
 
-echo "$TRAVIS_BUILD_NUMBER" > "${TRAVIS_COMMIT}.txt"
+echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
 git status -sb
 git commit -q -m "Publish test $TRAVIS_COMMIT"
-git tag -a -m 'auto-tag' "v0.0.${TRAVIS_BUILD_ID}"
+git tag -a -m 'travis-script-tag' "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master
 
-git remote -v
-git status -sb
+# git remote -v
+# git status -sb
 git log --oneline --graph --decorate
 
 echo "Second step achieved"

@@ -63,14 +63,13 @@ git remote -v
 ## Force checkout master branch
 git fetch
 git checkout master
-# git checkout origin/master
 
 echo "$TRAVIS_BUILD_NUMBER" > "${TRAVIS_COMMIT}.txt"
 git add .
 git status -sb
 git commit -q -m "Publish test $TRAVIS_COMMIT"
-git tag "v0.0.${TRAVIS_BUILD_ID}"
-# git push --follow-tags origin master
+git tag -a -m 'auto-tag' "v0.0.${TRAVIS_BUILD_ID}"
+git push --follow-tags origin master
 
 git remote -v
 git status -sb

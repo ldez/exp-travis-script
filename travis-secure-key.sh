@@ -2,7 +2,7 @@
 set -e
 
 ## Here, you will need to replace <org@email>, <somewhere> and <token>
-USER_EMAIL='lfernandez.dev@gmail.com'
+USER_EMAIL='<org@email>'
 PROJECT_DIRECTORY='<somewhere>'
 SSH_KEY_NAME='travis_rsa'
 GITHUB_TOKEN='<token>'

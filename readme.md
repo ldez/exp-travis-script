@@ -1,5 +1,7 @@
 # Travis publish
 
+[![Build Status](https://travis-ci.org/ldez/exp-travis-script.svg?branch=master)](https://travis-ci.org/ldez/exp-travis-script)
+
 ## Github way
 
 1. Get a Personal Access Token under https://github.com/settings/tokens

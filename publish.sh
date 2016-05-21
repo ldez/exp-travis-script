@@ -27,7 +27,10 @@ SSH_KEY_NAME="travis_rsa"
 # encrypted_43d3334a9d7d_key=
 # encrypted_43d3334a9d7d_iv=
 
-if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+
+CURRENT_TAG=$(git tag --contains HEAD)
+
+if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
   echo 'Publishing...'
 else
   echo 'Skipping publishing'

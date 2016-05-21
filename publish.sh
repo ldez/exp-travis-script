@@ -27,7 +27,6 @@ SSH_KEY_NAME="travis_rsa"
 # encrypted_43d3334a9d7d_key=
 # encrypted_43d3334a9d7d_iv=
 
-
 CURRENT_TAG=$(git tag --contains HEAD)
 
 if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then

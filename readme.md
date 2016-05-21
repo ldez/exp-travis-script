@@ -15,6 +15,8 @@ Get a Personal Access Token under https://github.com/settings/tokens.
 Only enable `public_repo` access for public repositories, `repo` for private.
 Save the token somewhere as you can only see it once.
 
-### Use SSH keywords
+### Use SSH key
 
 See [publish.sh](publish.sh)
+
+Security information: https://docs.travis-ci.com/user/pull-requests#Security-Restrictions-when-testing-Pull-Requests

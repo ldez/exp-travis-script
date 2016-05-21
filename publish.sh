@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-## Experimental
+## for testing purpose only
 echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"
 echo "TRAVIS_BUILD_DIR: $TRAVIS_BUILD_DIR"
 echo "TRAVIS_BUILD_ID: $TRAVIS_BUILD_ID"
@@ -20,7 +20,6 @@ echo "TRAVIS_TAG: $TRAVIS_TAG"
 USER_EMAIL="lfernandez.dev@gmail.com"
 USER_NAME="Ludovic Fernandez"
 GIT_REPOSITORY='git@github.com:ldez/exp-travis-script.git'
-GIHUB_REPO_SLUG='ldez/exp-travis-script'
 SSH_KEY_NAME="travis_rsa"
 AUTHORIZED_BRANCH='master'
 
@@ -29,7 +28,7 @@ cd "$TRAVIS_BUILD_DIR"
 ## Prevent publish on tags
 CURRENT_TAG=$(git tag --contains HEAD)
 
-if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_REPO_SLUG" = "$GIHUB_REPO_SLUG" ] && [ "$TRAVIS_BRANCH" = "$AUTHORIZED_BRANCH" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "$AUTHORIZED_BRANCH" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
   echo 'Publishing...'
 else
   echo 'Skipping publishing'
@@ -47,15 +46,13 @@ eval "$(ssh-agent -s)"
 chmod 600 ~/.ssh/${SSH_KEY_NAME}
 ssh-add ~/.ssh/${SSH_KEY_NAME}
 
-echo "First step achieved"
-
 ## Change origin url to use SSH
 git remote set-url origin ${GIT_REPOSITORY}
-# git remote -v
 
-## Force checkout master branch
+## Force checkout master branch (because Travis use a detached head)
 git checkout ${AUTHORIZED_BRANCH}
 
+## Simulate a publish action (only for testing purpose)
 echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
 git commit -q -m "Publish v0.0.${TRAVIS_BUILD_NUMBER}"
@@ -63,5 +60,3 @@ git tag -a -m 'travis-script-tag' "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master
 
 git log --oneline --graph --decorate
-
-echo "Second step achieved"

@@ -66,7 +66,7 @@ git checkout master
 echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
 # git status -sb
-git commit -q -m "Publish test $TRAVIS_COMMIT"
+git commit -q -m "Publish v0.0.${TRAVIS_BUILD_NUMBER}"
 git tag -a -m 'travis-script-tag' "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master
 

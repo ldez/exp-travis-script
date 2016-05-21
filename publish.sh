@@ -15,18 +15,20 @@ echo "TRAVIS_SECURE_ENV_VARS: $TRAVIS_SECURE_ENV_VARS"
 echo "TRAVIS_REPO_SLUG: $TRAVIS_REPO_SLUG"
 echo "TRAVIS_OS_NAME: $TRAVIS_OS_NAME"
 echo "TRAVIS_TAG: $TRAVIS_TAG"
-# cd "$TRAVIS_BUILD_DIR"
-# git log --oneline --graph --decorate
-# git status
 
 ## Custom variables
 USER_EMAIL="lfernandez.dev@gmail.com"
 USER_NAME="Ludovic Fernandez"
+GIT_REPOSITORY='git@github.com:ldez/exp-travis-script.git'
 SSH_KEY_NAME="travis_rsa"
+
 
 # encrypted_43d3334a9d7d_key=
 # encrypted_43d3334a9d7d_iv=
 
+cd "$TRAVIS_BUILD_DIR"
+
+## Prevent publish on tags
 CURRENT_TAG=$(git tag --contains HEAD)
 
 if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
@@ -36,13 +38,11 @@ else
   exit 0
 fi
 
-if [ -z "$VERSION" ]; then
-    VERSION=$(git rev-parse HEAD)
-fi
-
+## Git configuration
 git config --global user.email ${USER_EMAIL}
 git config --global user.name "${USER_NAME}"
 
+## Loading SSH key
 echo "Loading key..."
 openssl aes-256-cbc -K "$encrypted_43d3334a9d7d_key" -iv "$encrypted_43d3334a9d7d_iv" -in .travis/${SSH_KEY_NAME}.enc -out ~/.ssh/${SSH_KEY_NAME} -d
 eval "$(ssh-agent -s)"
@@ -50,3 +50,30 @@ chmod 600 ~/.ssh/${SSH_KEY_NAME}
 ssh-add ~/.ssh/${SSH_KEY_NAME}
 
 echo "First step achieved"
+
+## Experimental
+git remote -v
+git status -sb
+git log --oneline --graph --decorate
+
+## Change origin url to use SSH
+git remote set-url origin ${GIT_REPOSITORY}
+git remote -v
+
+## Force checkout master branch
+git fetch
+git checkout master
+# git checkout origin/master
+
+echo "$TRAVIS_BUILD_NUMBER" > "${TRAVIS_COMMIT}.txt"
+git add .
+git status -sb
+git commit -q -m "Publish test $TRAVIS_COMMIT"
+git tag "v0.0.${TRAVIS_BUILD_ID}"
+# git push --follow-tags origin master
+
+git remote -v
+git status -sb
+git log --oneline --graph --decorate
+
+echo "Second step achieved"

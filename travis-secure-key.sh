@@ -2,14 +2,18 @@
 set -e
 
 ## Here, you will need to replace <org@email>, <somewhere> and <token>
-USER_EMAIL='<org@email>'
+USER_EMAIL='lfernandez.dev@gmail.com'
 PROJECT_DIRECTORY='<somewhere>'
 SSH_KEY_NAME='travis_rsa'
 GITHUB_TOKEN='<token>'
 
 generateKey() {
-  ## First you create a RSA public/private key pair just for Travis.
-  ssh-keygen -t rsa -C "${USER_EMAIL}" -f ~/.ssh/${SSH_KEY_NAME}
+  if [ ! -e ~/.ssh/travis_rsa ]; then
+    ## First you create a RSA public/private key pair just for Travis.
+    ssh-keygen -t rsa -C "${USER_EMAIL}" -f ~/.ssh/${SSH_KEY_NAME}
+  else
+    echo "SSH key ${SSH_KEY_NAME} already exists"
+  fi
 
   ## Copy to clipboard.
   ## https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account

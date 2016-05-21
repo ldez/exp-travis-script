@@ -4,16 +4,16 @@
 
 ## SSH way (recommended)
 
-### GitHub token (optional)
+### Generating SSH keys and encryption
+
+See [travis-secure-key.sh](travis-secure-key.sh)
+
+#### GitHub token (optional)
 
 Get a Personal Access Token under https://github.com/settings/tokens.
 
 Only enable `public_repo` access for public repositories, `repo` for private.
 Save the token somewhere as you can only see it once.
-
-### Generating SSH keys and encryption
-
-See [travis-secure-key.sh](travis-secure-key.sh)
 
 ### Use SSH keywords
 

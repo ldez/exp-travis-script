@@ -1,5 +1,4 @@
 #!/bin/sh
-## Inspired by https://gist.github.com/douglasduteil/5525750
 set -e
 
 ## Here, you will need to replace <org@email>, <somewhere> and <token>
@@ -13,8 +12,7 @@ ssh-keygen -t rsa -C "${USER_EMAIL}" -f ~/.ssh/${SSH_KEY_NAME}
 
 ## Copy to clipboard.
 ##
-## Then following the official doc (https://help.github.com/articles/generating-ssh-keys#step-3-add-your-ssh-key-to-github),
-## You add it to your organisation repo : https://github.com/<org>/<repo>/settings/keys
+## Then following the official doc (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/),
 xclip -sel clip < ~/.ssh/${SSH_KEY_NAME}.pub
 
 echo 'Paste your key into the "Key" field ; Click "Add key" ; Confirm the action by entering your GitHub password'

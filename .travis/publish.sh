@@ -22,13 +22,15 @@ USER_NAME="Ludovic Fernandez"
 GIT_REPOSITORY='git@github.com:ldez/exp-travis-script.git'
 SSH_KEY_NAME="travis_rsa"
 AUTHORIZED_BRANCH='master'
+PUBLISH_TYPE=${PUBLISH_TYPE:="patch"}
 
 cd "$TRAVIS_BUILD_DIR"
 
 ## Prevent publish on tags
 CURRENT_TAG=$(git tag --contains HEAD)
 
-if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "$AUTHORIZED_BRANCH" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+if  [ -z "${STOP_PUBLISH}" ] && [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "$AUTHORIZED_BRANCH" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]
+then
   echo 'Publishing...'
 else
   echo 'Skipping publishing'
@@ -56,7 +58,7 @@ git checkout ${AUTHORIZED_BRANCH}
 echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
 git commit -q -m "Publish v0.0.${TRAVIS_BUILD_NUMBER}"
-git tag -a -m 'travis-script-tag' "v0.0.${TRAVIS_BUILD_NUMBER}"
+git tag -a -m "travis-script-tag ${PUBLISH_TYPE}" "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master
 
 git log --oneline --graph --decorate

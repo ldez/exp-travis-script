@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/ldez/exp-travis-script.svg?branch=master)](https://travis-ci.org/ldez/exp-travis-script)
 
-
 ## SSH way (recommended)
 
 ### GitHub token (optional)

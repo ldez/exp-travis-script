@@ -22,7 +22,6 @@ USER_NAME="Ludovic Fernandez"
 GIT_REPOSITORY='git@github.com:ldez/exp-travis-script.git'
 SSH_KEY_NAME="travis_rsa"
 
-
 # encrypted_43d3334a9d7d_key=
 # encrypted_43d3334a9d7d_iv=
 
@@ -65,7 +64,7 @@ git checkout master
 
 echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
-git status -sb
+# git status -sb
 git commit -q -m "Publish test $TRAVIS_COMMIT"
 git tag -a -m 'travis-script-tag' "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master

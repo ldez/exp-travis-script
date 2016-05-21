@@ -13,6 +13,8 @@ Save the token somewhere as you can only see it once.
 
 ### Generating SSH keys and encryption
 
-See `travis-secure-key.sh`
+See [travis-secure-key.sh](travis-secure-key.sh)
 
 ### Use SSH keywords
+
+See [publish.sh](publish.sh)

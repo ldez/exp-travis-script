@@ -23,7 +23,7 @@ Save the token somewhere as you can only see it once.
 
 ### Use SSH key
 
-See [publish.sh](publish.sh)
+See [publish.sh](.travis/publish.sh)
 
 - Custom Deployment: [Git](https://docs.travis-ci.com/user/deployment/custom/#Git)
 - Security information: [Security-Restrictions-when-testing-Pull-Requests](https://docs.travis-ci.com/user/pull-requests#Security-Restrictions-when-testing-Pull-Requests)

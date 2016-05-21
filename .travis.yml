@@ -20,4 +20,4 @@ script:
   - echo "foobar"
 
 after_success:
-  - ./publish.sh
+  - ./.travis/publish.sh

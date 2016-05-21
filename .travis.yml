@@ -2,15 +2,22 @@ notifications:
   email:
     on_success: never
     on_failure: change
+
 sudo: false
+
 os:
-- linux
+  - linux
+  - osx
+
 git:
   depth: 10
+
 branches:
   only:
   - master
+
 script:
   - echo "foobar"
+
 after_success:
   - ./publish.sh

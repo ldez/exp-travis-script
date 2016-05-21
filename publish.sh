@@ -22,16 +22,14 @@ USER_NAME="Ludovic Fernandez"
 GIT_REPOSITORY='git@github.com:ldez/exp-travis-script.git'
 GIHUB_REPO_SLUG='ldez/exp-travis-script'
 SSH_KEY_NAME="travis_rsa"
-
-# encrypted_43d3334a9d7d_key=
-# encrypted_43d3334a9d7d_iv=
+AUTHORIZED_BRANCH='master'
 
 cd "$TRAVIS_BUILD_DIR"
 
 ## Prevent publish on tags
 CURRENT_TAG=$(git tag --contains HEAD)
 
-if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_REPO_SLUG" = "$GIHUB_REPO_SLUG" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_REPO_SLUG" = "$GIHUB_REPO_SLUG" ] && [ "$TRAVIS_BRANCH" = "$AUTHORIZED_BRANCH" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
   echo 'Publishing...'
 else
   echo 'Skipping publishing'
@@ -51,27 +49,19 @@ ssh-add ~/.ssh/${SSH_KEY_NAME}
 
 echo "First step achieved"
 
-## Experimental
-# git remote -v
-# git status -sb
-# git log --oneline --graph --decorate
-
 ## Change origin url to use SSH
 git remote set-url origin ${GIT_REPOSITORY}
 # git remote -v
 
 ## Force checkout master branch
-git checkout master
+git checkout ${AUTHORIZED_BRANCH}
 
 echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
-# git status -sb
 git commit -q -m "Publish v0.0.${TRAVIS_BUILD_NUMBER}"
 git tag -a -m 'travis-script-tag' "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master
 
-# git remote -v
-# git status -sb
 git log --oneline --graph --decorate
 
 echo "Second step achieved"

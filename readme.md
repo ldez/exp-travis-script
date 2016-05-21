@@ -1,6 +1,10 @@
-# Travis publish
+# Travis continuous delivery
 
 [![Build Status](https://travis-ci.org/ldez/exp-travis-script.svg?branch=master)](https://travis-ci.org/ldez/exp-travis-script)
+
+This project explains how to manipulate a Git repository within [Travis CI](https://travis-ci.org) to publish a tag.
+
+Mainly for simulate the release of an Atom package.
 
 ## SSH way (recommended)
 

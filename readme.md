@@ -1,6 +1,6 @@
 # Travis continuous delivery
 
-[![Build Status](https://travis-ci.org/ldez/exp-travis-script.svg?branch=master)](https://travis-ci.org/ldez/exp-travis-script)
+[![Build Status](https://travis-ci.org/ldez/travis-continuous-delivery-atom-publish.svg?branch=master)](https://travis-ci.org/ldez/travis-continuous-delivery-atom-publish)
 
 This project explains how to manipulate a Git repository within [Travis CI](https://travis-ci.org) to publish a tag.
 

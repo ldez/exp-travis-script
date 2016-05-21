@@ -20,6 +20,7 @@ echo "TRAVIS_TAG: $TRAVIS_TAG"
 USER_EMAIL="lfernandez.dev@gmail.com"
 USER_NAME="Ludovic Fernandez"
 GIT_REPOSITORY='git@github.com:ldez/exp-travis-script.git'
+GIHUB_REPO_SLUG='ldez/exp-travis-script'
 SSH_KEY_NAME="travis_rsa"
 
 # encrypted_43d3334a9d7d_key=
@@ -30,7 +31,7 @@ cd "$TRAVIS_BUILD_DIR"
 ## Prevent publish on tags
 CURRENT_TAG=$(git tag --contains HEAD)
 
-if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+if [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$TRAVIS_REPO_SLUG" = "$GIHUB_REPO_SLUG" ] && [ "$TRAVIS_BRANCH" = "master" ] && [ -z "$CURRENT_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
   echo 'Publishing...'
 else
   echo 'Skipping publishing'

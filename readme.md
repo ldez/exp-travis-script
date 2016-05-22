@@ -14,6 +14,8 @@ See [travis-secure-key.sh](travis-secure-key.sh)
 
 [Adding a new SSH key to your GitHub account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 
+In this case you can assume to don't define a passphrase for the SSH key.
+
 Encrypt SSH key:
 - https://docs.travis-ci.com/user/encrypting-files/
 - https://github.com/travis-ci/travis.rb#encrypt-file

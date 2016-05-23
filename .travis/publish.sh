@@ -51,13 +51,14 @@ ssh-add ~/.ssh/${SSH_KEY_NAME}
 ## Change origin url to use SSH
 git remote set-url origin ${GIT_REPOSITORY}
 
-## Force checkout master branch (because Travis use a detached head)
+## Force checkout master branch (because Travis uses a detached head)
 git checkout ${AUTHORIZED_BRANCH}
 
 ## Simulate a publish action (only for testing purpose)
 echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
-git commit -q -m "Publish v0.0.${TRAVIS_BUILD_NUMBER}"
+# NOTE: Travis automatically skips the build if the commit contains [skip ci] 
+git commit -q -m "Prepare 0.0.${TRAVIS_BUILD_NUMBER} release [ci skip]"
 git tag -a -m "travis-script-tag ${PUBLISH_TYPE}" "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master
 

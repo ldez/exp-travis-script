@@ -6,6 +6,7 @@ This project explains how to manipulate a Git repository within [Travis CI](http
 
 Mainly for simulate the release of an Atom package.
 
+
 ## SSH way (recommended)
 
 ### Generating SSH keys and encryption
@@ -33,3 +34,36 @@ See [publish.sh](.travis/publish.sh)
 
 - Custom Deployment: [Git](https://docs.travis-ci.com/user/deployment/custom/#Git)
 - Security information: [Security-Restrictions-when-testing-Pull-Requests](https://docs.travis-ci.com/user/pull-requests#Security-Restrictions-when-testing-Pull-Requests)
+
+
+## Skip Build
+
+### Travis CI
+
+Travis automatically skips the build if the commit contains [ci skip].
+
+- https://docs.travis-ci.com/user/customizing-the-build/#Skipping-a-build
+
+Example:
+
+```shell
+git commit -m 'My commit message [ci skip]'
+```
+
+### AppVeyor
+
+AppVeyor automatically skips the build if the commit contains [ci skip] or [skip ci] or [skip appveyor].
+
+- https://www.appveyor.com/docs/how-to/skip-build
+
+Example:
+
+```yml
+skip_commits:
+
+  # Regex for matching commit message
+  message: /Created.*\.(png|jpg|jpeg|bmp|gif)/
+
+  # Commit author's username, name, email or regexp maching one of these.
+  author: John
+```

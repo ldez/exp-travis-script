@@ -40,7 +40,7 @@ See [publish.sh](.travis/publish.sh)
 
 ### Travis CI
 
-Travis automatically skips the build if the commit contains [ci skip].
+Travis automatically skips the build if the commit contains `[ci skip]`.
 
 - https://docs.travis-ci.com/user/customizing-the-build/#Skipping-a-build
 
@@ -52,7 +52,7 @@ git commit -m 'My commit message [ci skip]'
 
 ### AppVeyor
 
-AppVeyor automatically skips the build if the commit contains [ci skip] or [skip ci] or [skip appveyor].
+AppVeyor automatically skips the build if the commit contains `[ci skip]` or `[skip ci]` or `[skip appveyor]`.
 
 - https://www.appveyor.com/docs/how-to/skip-build
 

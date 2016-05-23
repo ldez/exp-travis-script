@@ -54,9 +54,15 @@ git commit -m 'My commit message [ci skip]'
 
 AppVeyor automatically skips the build if the commit contains `[ci skip]` or `[skip ci]` or `[skip appveyor]`.
 
+AppVeyor can use a commits filter defined in `appveyor.yml` : `skip_commits:`
+
 - https://www.appveyor.com/docs/how-to/skip-build
 
-Example:
+Examples:
+
+```shell
+git commit -m 'My commit message [ci skip]'
+```
 
 ```yml
 skip_commits:

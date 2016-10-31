@@ -19,10 +19,8 @@ echo "TRAVIS_TAG: $TRAVIS_TAG"
 ## Custom variables
 USER_EMAIL="lfernandez.dev@gmail.com"
 USER_NAME="Ludovic Fernandez"
-GIT_REPOSITORY='git@github.com:ldez/exp-travis-script.git'
-SSH_KEY_NAME="travis_rsa"
-AUTHORIZED_BRANCH='master'
 PUBLISH_TYPE=${PUBLISH_TYPE:="patch"}
+SSH_KEY_NAME="travis_rsa"
 
 cd "$TRAVIS_BUILD_DIR"
 
@@ -38,8 +36,13 @@ else
 fi
 
 ## Git configuration
-git config --global user.email ${USER_EMAIL}
+git config --global user.email "${USER_EMAIL}"
 git config --global user.name "${USER_NAME}"
+
+## Repository URL
+GIT_REPOSITORY=$(git config remote.origin.url)
+GIT_REPOSITORY=${GIT_REPOSITORY/git:\/\/github.com\//git@github.com:}
+GIT_REPOSITORY=${GIT_REPOSITORY/https:\/\/github.com\//git@github.com:}
 
 ## Loading SSH key
 echo "Loading key..."
@@ -57,7 +60,7 @@ git checkout ${AUTHORIZED_BRANCH}
 ## Simulate a publish action (only for testing purpose)
 echo "$TRAVIS_BUILD_ID" > "${TRAVIS_COMMIT}.txt"
 git add .
-# NOTE: Travis automatically skips the build if the commit contains [skip ci] 
+# NOTE: Travis automatically skips the build if the commit contains [skip ci]
 git commit -q -m "Prepare 0.0.${TRAVIS_BUILD_NUMBER} release [ci skip]"
 git tag -a -m "travis-script-tag ${PUBLISH_TYPE}" "v0.0.${TRAVIS_BUILD_NUMBER}"
 git push --follow-tags origin master

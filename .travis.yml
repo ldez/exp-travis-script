@@ -16,6 +16,10 @@ branches:
   only:
   - master
 
+env:
+  global:
+    - AUTHORIZED_BRANCH="master"
+
 script:
   - echo "foobar"
 

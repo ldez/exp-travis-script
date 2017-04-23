@@ -10,7 +10,7 @@ GITHUB_TOKEN='<token>'
 
 ## Generate SSH key if necessary.
 generateKey() {
-  if [ ! -e ~/.ssh/travis_rsa ]; then
+  if [ ! -e ~/.ssh/${SSH_KEY_NAME} ]; then
     ## First you create a RSA public/private key pair just for Travis.
     ssh-keygen -t rsa -C "${USER_EMAIL}" -f ~/.ssh/${SSH_KEY_NAME}
   else
